@@ -92,7 +92,7 @@ public class Solution {
 ```
 顺便提一下，这个方法经常无法通过，应该是时间复杂度过高的原因吧。
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/1SuccessResult.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/1SuccessResult.png?raw=true)
 
 **分析**
 这个方法的原理很简单，首先将两个数组个数和是奇数和偶数的情况所需的取值个数以及中间值计算方法得出。然后将两个数组按照从小到大的顺序合并成一个数组，最后根据前面得到的中间数的计算方法得出中间值。
@@ -164,7 +164,7 @@ public class Solution {
 **分析**
 这个方法优化的地方就是通过事先得到中间值的位置，在得到该位置的数值之后就不继续往下走了。
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/1OptimizeSuccessResult.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/1OptimizeSuccessResult.png?raw=true)
 
 
 ## 方法二：
@@ -202,7 +202,7 @@ public class Solution {
    }
 ```
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/2SeccessResult.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/2SeccessResult.png?raw=true)
 
 **分析**
 
@@ -316,7 +316,7 @@ public class Solution {
 }
 ```
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/3SuccessResult.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/3SuccessResult.png?raw=true)
 
 **分析**
 这个方法的原理和上一个方法是大致相同的。
@@ -353,7 +353,7 @@ public class Solution {
 }
 ```
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/4SuccessResult.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/4SuccessResult.png?raw=true)
 
 **分析**
 这个方法的原理是这样的，从两个数组中间值开始通过递归对比，每次排除一半的选项。如果A的中间值小于B的中间值则保留a的右侧数字和b的左侧数字。反之相反。然后得到l和r位置的数字,再相加除以2即可。需要注意的是这里的l和r不是index，不是从零开始的。如果两个数组的长度的和是奇数的话l和r是相同的，偶数则不同。

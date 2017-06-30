@@ -1,5 +1,6 @@
 
-[Chinese ver]3.最长的没有重复字符的子字符串
+[Chinese ver]
+## 3.最长的没有重复字符的子字符串
 
 给你一个字符串，得出最长的一个没有重复字符的子字符串的长度。
 
@@ -14,7 +15,7 @@
 注意答案必须是一个子字符串，“pwke”是一个子序列，而不是一个子字符串。
 
 先来一个极其繁琐的算法，一开始没有经过太多的思考，导致不断有没考虑到情况发生，不断的修修改改，成了一个极其冗余的代码。。
-####初解
+### 初解
 
 ``` java
 public class Solution {
@@ -64,11 +65,11 @@ public class Solution {
 }
 ```
 
-![这代码。。没脸见人](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/most_tedious_result.png?raw=true)
+![这代码。。没脸见人](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/most_tedious_result.png?raw=true)
 
 痛定思过，惨痛的教训告诉我们要深思熟虑后再写代码，这个代码就不分析了，写出来的东西自己都要看不懂了，我连注释都不好意思写了，只是给自己留个教训。。接下来会对这个方法做一个优化和重新构思。
 
-####二次解
+### 二次解
 
 ``` java
 public class Solution {
@@ -98,7 +99,7 @@ public class Solution {
 优化之后的代码就很清晰了。重新构思的时候才想到还有一个Math.max()的方法可以用，对api的敏感度还是不够。
 
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/promote_self.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/promote_self.png?raw=true)
 
 **分析**
 这个方法的原理就是将每一个字符进行遍历，为了避免多重循环嵌套，我们使用了hashmap来将时间成本换成空间成本，通过hashmap来判断前面是否有这个字符，并存储他的序号信息。那怎么得到最长的子字符串呢？其实可以分成以下几种情况：
@@ -114,7 +115,7 @@ public class Solution {
 
 接下来我们看一下这类题目的几类解法。
 
-####方法一：暴力循环
+### 方法一：暴力循环
 
 ``` java
 public class Solution {
@@ -140,7 +141,7 @@ public class Solution {
 }
 ```
 
-![扎心了老铁](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/brute_result.png?raw=true)
+![扎心了老铁](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/brute_result.png?raw=true)
 
 **分析**
 这个方法的原理很简单，就是最外层的循环L1遍历每一个字符a，嵌套一个遍历a之后所有字符b的循环L2，在L2中又用了一个循环L3用hashset的方式来遍历a到b间以a为开头的所有字符串，并判断是否是没有重复值的字符串。嵌套了三层的循环！！！直接导致了Time Limit Exceeded 的结果，表示你这个方法太耗时了，不予通过。
@@ -157,13 +158,13 @@ O( ∑  ( ∑ (j-i))) = O(∑    —————————————— ) = 
   i=0  j=i+1          i=0         2
 ```
 这个转化过程呢其实就是利用的等差数列的n项和公式，太难打公式了，中间步骤就不详细写了。
-![等差数列前n项和](https://github.com/LeonChen/LeetCode-record/blob/master/Mathematical_Formula/arithmetic%20progression%20_nsum.png?raw=true)
+![等差数列前n项和](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/Mathematical_Formula/arithmetic%20progression%20_nsum.png?raw=true)
 
 空间复杂度 ： O(min(n,m)) . n就是字符串的长度，m是字母表的字符集的值。因为我们最多就可能有m个不重复的值，所以hashset的size最大也只会是m.
 
 这个方法在逻辑上可以稍微做一个优化，主要的思路就是其实如果a到b已经是包含重复的字符了，那么a到b后面的字符也一定是包含重复字符的。可以省略了那些比较。
 
-####方法二：滑窗算法（也称K近邻算法）
+### 方法二：滑窗算法（也称K近邻算法）
 
 ``` java
 public class Solution {
@@ -186,7 +187,7 @@ public class Solution {
 }
 ```
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_result.png.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_result.png?raw=true)
 
 **分析**
 方法一重复检查每一个子字符串是否重复，其实没有必要这样，方法二就是避免了多次重复检查，当i~j没有重复时，我们只需要检测s[j + 1]是否和i~j中的字符重复。直到j+1的字符重复了，我们就得到了i字符的最长不重复字符。当j不小于n时就可以停止计算了，因为此时的[i,j)肯定要长于[i+1,j)。
@@ -194,7 +195,7 @@ public class Solution {
 时间复杂度 ： O(2n) = O(n)
 空间复杂度 ： O(min(m,n)) n就是字符串的长度，m是字母表的字符集的值。因为我们最多就可能有m个不重复的值，所以hashset的size最大也只会是m.
 
-####方法三：改良后的滑窗算法
+### 方法三：改良后的滑窗算法
 
 HashMap
 ``` java
@@ -215,7 +216,7 @@ public class Solution {
 }
 ```
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_Optimized_hashmap_result.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_Optimized_hashmap_result.png?raw=true)
 
 **分析**
 这个方法是对方法二的改进，我们使用HashMap来保存出现的字符和他的位置，当出现重复字符时，我们可以直接定位到重复字符的位置(注意这里的位置和程序上的序号是不同的，他的第一位就是1而不是我们程序上的0.)，对比以前的i取较大的值赋值为新的i。为什么取大值可以看上面的二次解
@@ -240,7 +241,7 @@ public class Solution {
 }
 ```
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_Optimized_ascii_result.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_Optimized_ascii_result.png?raw=true)
 
 效率最快的一种，在同样的复杂度上为什么会比上一种hashmap的方法快那么多呢，简单点说，其实集合大部分都是由数组构成的，hashmap其实就是由数组加链表封装而成的，所以在速度上数组查找会优于hashmap查找。
 

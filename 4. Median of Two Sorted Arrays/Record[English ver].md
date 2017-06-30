@@ -83,7 +83,7 @@ public class Solution {
 
 by the way ,this method often failed , maybe is the complexity is too big.
 
-![efficiency](https://github.com/LeonChen/LeetCode-record/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/1SuccessResult.png?raw=true)
+![efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/1SuccessResult.png?raw=true)
 
 **Analysis**
 This method is easy,first we figure out how to get the median value and how many number we need for calculate median value when the sum of the two arrays size is odd-lengthed or even-lengthed. And then we put the two arrays together sorted from small to large , and then use the method we got to calculate the median value.
@@ -157,7 +157,7 @@ public class Solution {
 
 The optmization is we get the index of the median value ,  when we sorted the array to the index , we can calculate the median value and we don't need to sorted all the number.
 
-![efficiency](https://github.com/LeonChen/LeetCode-record/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/1OptimizeSuccessResult.png?raw=true)
+![efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/1OptimizeSuccessResult.png?raw=true)
 
 ## Approach 2
 
@@ -194,7 +194,7 @@ public class Solution {
    }
 ```
 
-![efficiency](https://github.com/LeonChen/LeetCode-record/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/2SeccessResult.png?raw=true)
+![efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/2SeccessResult.png?raw=true)
 
 **Analysis**
 
@@ -314,7 +314,7 @@ public class Solution {
 }
 ```
 
-![efficiency](https://github.com/LeonChen/LeetCode-record/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/3SuccessResult.png?raw=true)
+![efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/3SuccessResult.png?raw=true)
 
 **Analysis**
 this method's principle is same as the Approach 2.
@@ -352,7 +352,7 @@ public class Solution {
 }
 ```
 
-![efficiency](https://github.com/LeonChen/LeetCode-record/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/4SuccessResult.png?raw=true)
+![efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Images/4SuccessResult.png?raw=true)
 
 **Analysis**
 this method is like that, compare the two arrays's median recursively, and every time ignore a half of the two arrays. if A's median is smaller than B's median , then we keep A's right and B's left.Otherwise opposite. last ,we will get L and R , use (L+R)/2.0 to get the median.notice that L and R is not index, isn't start from 0 . when the numbers of the sum of two array's size is odd-lengthed L is the same as R,Otherwise is different.

@@ -56,7 +56,7 @@ public class Solution {
    }
 ```
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/1%20Two%20Sum/Images/WrongResult.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/SuccessResult1.png?raw=true)
 
 **分析**
 这个方法分为奇偶两种情况进行计算。首先对每一个字符串里的字符进行两种情况的计算，extendPalindrome方法的原理就是当对应的位置的字符相同时，就将左侧字符向左一位，右侧字符向右一位，然后再重复进行这个比较过程。
@@ -94,7 +94,7 @@ public class Solution {
 
 ```
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/1%20Two%20Sum/Images/BruteForceResult.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/SuccessResult2.png?raw=true)
 
 **分析**
 这个方法主要是每当指针向右移时，我们都以这个位置的字符为结尾看是否能有新的长度为length(current length +1 或者 current length +2)的回文字符串。
@@ -107,7 +107,7 @@ public class Solution {
 ```java
 public class Solution {
     public String longestPalindrome(String s) {
-    char[] str = init(s);
+      char[] str = changeString(s);
 		  String result = manacher(str,s);
 
 		  return result;
@@ -119,7 +119,7 @@ public class Solution {
 	 * @param s
 	 * @return
 	 */
-	public static char[] init(String s)
+	public static char[] changeString(String s)
 	{
 	    char[] str = new char[s.length() * 2 + 1];
 
@@ -135,13 +135,11 @@ public class Solution {
 	}
 
 	/**
-	 *
-	 *
-	 * @param str
+	 * manacher 算法实现找到回文字符串最长的一个
 	 */
 	public static String manacher(char[] s,String olds)
 	{
-		String result = "";
+		  String result = "";
 	    int rad[] = new int[s.length];
 	    int start = 0;
 	    int end = 0;
@@ -159,16 +157,13 @@ public class Solution {
 	        }
 
 	        if (maxLen < j ) {
-				maxLen =j;
-				start = i - j  ;
-				end =i + j ;
+				        maxLen =j;
+				        start = i - j  ;
+				        end =i + j ;
 
-			}
+			       }
 	        rad[i] = j;
-
 	        maxLen = maxLen > j ? maxLen : j;
-
-
 
 	        k = 1;
           //当回文中包含子回文，看子回文是否超出父回文边界。 分三种情况。
@@ -181,7 +176,6 @@ public class Solution {
 	        j = Math.max(j - k, 0);
 	    }
 
-
 	    result = olds.substring(start/2,end/2);
 	    return result;
 
@@ -192,45 +186,31 @@ public class Solution {
 ```
 
 **分析**
-首先,在字符串s中，用rad[i]表示第i个字符的回文半径，即rad[i]尽可能大，且满足：
-s[i-rad[i],i-1] = s[i+1,i+rad[i]]
-很明显，求出了所有的rad，就求出了所有的长度为奇数的回文子串。
-至于偶数的怎么求,最后再讲。
+在这个问题中，回文的情况一共有两种，一种是奇数回文，一种是偶数回文，为了将他们合并成一种情况，我们可以在首尾和每两个字符中间加上一个特殊字符，如‘#’，形如"#a#b#b#c#a#".这样我们就将所有的回文情况合并成奇数回文的情况。
 
-假设现在求出了rad[1..i-1]，现在要求后面的rad值，并且通过前面的操作，得知了当前字符i的rad值至少为j，现在通过试图扩大j来扫描，求出了rad[i]。再假设现在有个指针k，从1循环到rad[i]，试图通过某些手段来求出[i+1,i+rad[i]]的rad值。
+在字符串s中，我们用rad[i]表示第i个字符的回文半径，可以得到s[i-rad[i],i-1] = s[i+1,i+rad[i]]，只要求出了所有的rad，就求出了所有奇数长度的回文子串。
+
+当我们得到了rad[1..i-1]的值，并通过比较对称字符得到当前字符i的rad值至少为j，求出了rad[i]。现在我们设一个指针k，从1循环到rad[i]，以此来求出[i+1,i+rad[i]]的rad值。
+
 根据定义，黑色的部分是一个回文子串，两段红色的区间全等。
 因为之前已经求出了rad[i-k]，所以直接用它.有3种情况：
 （1）rad[i]-k < rad[i-k]
+![Situation1.jpg](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/Situation1.jpg?raw=true)
 
-如图,rad[i-k]的范围为青色。因为黑色的部分是回文的，且青色的部分超过了黑色的部分，所以rad[i+k]肯定至少为rad[i]-k，即橙色的部分。那橙色以外的部分就不是了吗？这是肯定的。因为如果橙色以外的部分也是回文的，那么根据青色和红色部分的关系，可以证明黑色部分再往外延伸一点也是一个回文子串，这肯定不可能，因此rad[i+k] = rad[i]-k
+如图,rad[i-k]的范围为墨绿色。因为黑色的部分是回文的，且墨绿色的部分超过了黑色的部分，所以rad[i+k]至少为rad[i]-k，即橙色的部分。有没有可能rad[i+k]的值大于rad[i]-k呢？这是不可能发生的，根据回文的特性我们知道，如果橙色部分以外也是回文，那么黑色的回文部分就可以向外拓展。与假设冲突。因此rad[i+k] = rad[i]-k。
 
 （2）rad[i]-k > rad[i-k]
+![Situation2.jpg](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/Situation2.jpg?raw=true)
 
-如图,rad[i-k]的范围为青色。因为黑色的部分是回文的，且青色的部分在黑色的部分里面，根据定义，很容易得出：rad[i+k] = rad[i-k]
+如图,rad[i-k]的范围为墨绿色。因为黑色的部分是回文的，且墨绿色的部分在黑色的部分里面，根据回文特性，很容易得出：rad[i+k] = rad[i-k]。
 
-根据上面两种情况，可以得出结论：当rad[i]-k! = rad[i-k]的时候，rad[i+k] = min(rad[i]-k,rad[i-k])。
+根据上面两种情况，可以得出结论：当rad[i]-k != rad[i-k]的时候，rad[i+k] = min(rad[i]-k,rad[i-k])。
 
 （3）rad[i]-k = rad[i-k]
+![Situation3.jpg](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/Situation3.jpg?raw=true)
+如图，通过和第一种情况对比之后会发现，因为墨绿色的部分没有超出黑色的部分，所以即使橙色的部分全等，也无法像第一种情况一样引出矛盾，因此橙色的部分是有可能全等的。但是，根据已知的信息，我们不知道橙色的部分是多长，因此就把i指针移到i+k的位置，j=rad[i-k]\(因为它的rad值至少为rad[i-k])，是否可以向外拓展等下个循环再做。
 
-如图，通过和第一种情况对比之后会发现，因为青色的部分没有超出黑色的部分，所以即使橙色的部分全等，也无法像第一种情况一样引出矛盾，因此橙色的部分是有可能全等的。但是，根据已知的信息，我们不知道橙色的部分是多长，因此就把i指针移到i+k的位置，j=rad[i-k](因为它的rad值至少为rad[i-k])，等下次循环的时候再做了。
-整个算法就这样。
-至于时间复杂度为什么是O(n)
-
-上文还留有一个问题，就是这样只能算出奇数长度的回文子串，偶数的就不行。怎么办呢?
-有一种直接但比较笨的方法,就是做两遍(因为两个程序是差不多的，只是rad值的意义和一些下标变了而已)。但是写两个差不多的程序是很痛苦的，而且容易错。所以一种比较好的方法就是在原来的串中每两个字符之间加入一个特殊字符，再做。
-如:aabbaca把它变成a#a#b#b#a#C#a，这样的话，无论原来的回文子串长度是偶数还是奇数，现在都变成奇数了
-
-
-时间复杂度 ： O(n) 。n是字符串长度。
+时间复杂度 ： O(n) 。看起来程序里用到了循环嵌套，但是实际上他只对没有计量过的i进行计量。
 空间复杂度 ： O(n) .
-
-
-
-
-
-
-
-
-
 
 如果你有更好的办法或者对我这里的描述有其他看法，请联系我。谢谢

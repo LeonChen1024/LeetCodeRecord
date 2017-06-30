@@ -1,5 +1,6 @@
 
-[English ver]Given a string, find the length of the longest substring without repeating characters.
+[English ver]
+Given a string, find the length of the longest substring without repeating characters.
 
 **Example:**
 ```
@@ -12,7 +13,7 @@ Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer 
 
 First time i get a very tedious algorithm, because of i did not thinking about the problem carefully in the beginning, it causes that i hava to fix bug again and again because of the situation i haven't think about . this makes code become very redundant .
 
-####The solution for the first time
+### The solution for the first time
 
 ``` java
 public class Solution {
@@ -62,11 +63,11 @@ public class Solution {
 }
 ```
 
-![shame on this code ](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/most_tedious_result.png?raw=true)
+![shame on this code ](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/most_tedious_result.png?raw=true)
 
 i have thinking about did i have problems in the way i tried before, the twists before let me realize to think carefully and then write the code,i am not going to analyze this code, because i almost can't understand what i writen, I even  embarrassed to write the annotate, just leave A lesson to me. The next step i will optimize and rethink this approach.
 
-####The solution for the second time
+### The solution for the second time
 
 ``` java
 public class Solution {
@@ -95,7 +96,7 @@ public class Solution {
 
 After the optimize ,the code is very clear. I haven't thought that there is a Math.max () method can be used util i re-conceived the code, still need more sensitivity of the api.
 
-![效率](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/promote_self.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/promote_self.png?raw=true)
 
 **Analysis**
 The principle of this method is to traverse each character, in order to avoid nest loop, we use the hashmap to replace the time cost of space costs,determine whether there is a character in front by hashmap, and store his index number information. How do we get the longest substring? In fact, it can be divided into the following situations:
@@ -112,7 +113,7 @@ Space complexity: O(n).
 
 and then we look some type solution of this kind problem.
 
-####Approach 1：Brute Force
+### Approach 1：Brute Force
 
 ``` java
 public class Solution {
@@ -138,7 +139,7 @@ public class Solution {
 }
 ```
 
-![heartbreak](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/brute_result.png?raw=true)
+![heartbreak](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/brute_result.png?raw=true)
 
 **Analysis**
 The principle of this method is very simple, the outermost loop L1 traverse of every character a, nest a loop L2 traverse of b (all the characters which is after a), use another loop with the hashset to traverse all the string between a and b which is beginning with a, and determine that if it is a string with no repeat character. Nested a three-tier loop! it lead to the results of Time Limit Exceeded, that means your method is too time-consuming, is not a good method.
@@ -157,14 +158,14 @@ O( ∑  ( ∑ (j-i))) = O(∑    —————————————— ) = 
 ```
 
 This transformation process is actually the use of the sum of the first n terms of an arithmetic progression, is too difficult to print the formula on my computer, i am not going to print the detail of the steps .
-![the sum of the first n terms of an arithmetic progression](https://github.com/LeonChen/LeetCode-record/blob/master/Mathematical_Formula/arithmetic%20progression%20_nsum.png?raw=true)
+![the sum of the first n terms of an arithmetic progression](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/Mathematical_Formula/arithmetic%20progression%20_nsum.png?raw=true)
 
 Space complexity: O(min(n,m)) . n is the length of the string,m is the set of the size of charset.Because there are m didn't repeat value at most,so the hashset's size will be m at most.
 
 This method can make a little optimization logically , the main idea is that if from a to b is already containing repeated characters, then a to the characters after b must also contain repeated characters. You can omit those comparisons.
 
 
-####Approach 2：Sliding Window（K-Nearest Neighbor algorithm）
+### Approach 2：Sliding Window（K-Nearest Neighbor algorithm）
 
 ``` java
 public class Solution {
@@ -187,7 +188,7 @@ public class Solution {
 }
 ```
 
-![efficiency](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_result.png.png?raw=true)
+![efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_result.png.png?raw=true)
 
 **Analysis**
 
@@ -217,7 +218,7 @@ public class Solution {
 }
 ```
 
-![efficiency](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_Optimized_hashmap_result.png?raw=true)
+![efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_Optimized_hashmap_result.png?raw=true)
 
 **Analysis**
 
@@ -243,7 +244,7 @@ public class Solution {
 }
 ```
 
-![efficiency](https://github.com/LeonChen/LeetCode-record/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_Optimized_ascii_result.png?raw=true)
+![efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Images/Sliding_Window_Optimized_ascii_result.png?raw=true)
 
 The most efficient one, the reason of this method can run more fast than the previous hashmap while they have the same complexity, simply said, in fact of most collection is composed of arrays, hashmap is actually composed by the array and the list , So the array's search speed will be better than the hashmap search speed.
 

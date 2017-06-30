@@ -23,7 +23,7 @@ Output: "bb"
 I have misunderstood the meaning of the word palindrome , i thought it was the meaning of repeat,finally i know that it was the meaning of a string which is the same when you look from left to right and from right to left.
 According to that , we know it has two situation,one the length is odd , another is even .
 
-#### Approach 1 :
+### Approach 1 :
 ``` java
 public class Solution {
        private int lo, maxLen;
@@ -53,7 +53,7 @@ public class Solution {
    }
 ```
 
-![Efficiency](https://github.com/LeonChen/LeetCode-record/blob/master/1%20Two%20Sum/Images/WrongResult.png?raw=true)
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/SuccessResult1.png?raw=true)
 
 **Analysis**
 This method divided the problem into two situation.First we loop the every char of the String,each char call the extendPalindrome method .The extendPalindrome method is used to find the char of corresponding position is the same or not . if so we move the index of the left char to left one ,and the right char to right one,and then repeat this procedure.
@@ -61,7 +61,7 @@ This method divided the problem into two situation.First we loop the every char 
 Time complexity ： O(n^2) 。n is the length of the string.
 Space complexity ： O(n) .
 
-#### Approach 2 :
+### Approach 2 :
 
 ``` java
 public class Solution {
@@ -92,7 +92,7 @@ public class Solution {
 
 ```
 
-![Efficiency](https://github.com/LeonChen/LeetCode-record/blob/master/1%20Two%20Sum/Images/BruteForceResult.png?raw=true)
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/SuccessResult2.png?raw=true)
 
 **Analysis**
 This method is when then index move to right , we used the char of this index as the end of the substring which length is current length +1 or current length +2, and see if is the Palindrome string .
@@ -100,238 +100,120 @@ This method is when then index move to right , we used the char of this index as
 Time complexity ： O(n^2) 。n is the length of the string.
 Space complexity ： O(n) .
 
+
+### Approach 3 (Manacher's Algorithm)
+
+```java
+public class Solution {
+    public String longestPalindrome(String s) {
+      char[] str = changeString(s);
+		  String result = manacher(str,s);
+
+		  return result;
+}
+
+/**
+	 * 返回例如 #a#c#b#c#a#a#c#b#c#d#形式的字符串数组
+	 *
+	 * @param s
+	 * @return
+	 */
+	public static char[] changeString(String s)
+	{
+	    char[] str = new char[s.length() * 2 + 1];
+
+	    int i = 0;
+	    for (; i < s.length(); i++)
+	    {
+	        str[2 * i] = '#';
+	        str[2 * i + 1] = s.charAt(i);
+	    }
+	    str[2 * i] = '#';
+
+	    return str;
+	}
+
+	/**
+	 * manacher 算法实现找到回文字符串最长的一个
+	 */
+	public static String manacher(char[] s,String olds)
+	{
+		  String result = "";
+	    int rad[] = new int[s.length];
+	    int start = 0;
+	    int end = 0;
+	    //i index,j 回文半径，k
+	    int i = 1, j = 0, k;
+
+	    // 记录最长的回文串的长度
+	    int maxLen = 0;
+	    while (i < s.length)
+	    {
+	        // 扫描得出rad值
+	        while (i - j - 1 > -1 && i + j + 1 < s.length
+	                && s[i - j - 1] == s[i + j + 1]) {
+	        	  j++;
+	        }
+
+	        if (maxLen < j ) {
+				        maxLen =j;
+				        start = i - j  ;
+				        end =i + j ;
+
+			       }
+	        rad[i] = j;
+	        maxLen = maxLen > j ? maxLen : j;
+
+	        k = 1;
+          //当回文中包含子回文，看子回文是否超出父回文边界。 分三种情况。
+	        while (k <= rad[i] && rad[i - k] != rad[i] - k)
+	        {
+	            rad[i + k] = Math.min(rad[i - k], rad[i] - k);
+	            k++;
+	        }
+	        i = i + k;
+	        j = Math.max(j - k, 0);
+	    }
+
+	    result = olds.substring(start/2,end/2);
+	    return result;
+
+	}
+
+}
+
+```
+
+**Analysis**
+
+In this question,the Palindrome has two situation, one is even Palindrome , another is odd Palindrome. In order to combine them into one situation, we can add a special char like '#' between every two char of the string which is neaby ,and the begining and the ending of the string . like  "#a#b#b#c#a#". Now we have combine the two situation into together.
+
+In the String s ,we use rad[i] to represent the Palindrome radius of index i , we can get s[i-rad[i],i-1] = s[i+1,i+rad[i]] easily , once we get the all the rad of the String , we get the all the Palindrome which is even length .
+
+when we get the value of rad[1..i-1],and get the rad value of the char i is at least j through compare char which is symmetry.Now we suppose that we have a index k , it start from 1 to rad[i],we can use it to get the rad valule of the [i+1,i+rad[i]].
+
+According to the acept of the Palindrome , we know the part of the black is a Palindrome, two parts of the red have the same length.
+Because we have calculate the value of rad[i-k],so we can use it . There are three situations:
+(1)rad[i]-k < rad[i-k]
+![Situation1.jpg](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/Situation1.jpg?raw=true)
+
+As the picture , rad[i-k]'s range is blackish green line . Because of the black line is Palindrome,and a part of blackish green line is out of the black line,so rad[i+k] is at least rad[i]-k (the orange line).Is there have any possible that rad[i+k] is larger than rad[i]-k? it's impossible ,according to the acept of the Palindrome ,we know that if the part out of the orange line is the Palindrome , than the black line can expand outward. Is different from the suppose we have done . so rad[i+k] = rad[i]-k。
+
+（2）rad[i]-k > rad[i-k]
+![Situation2.jpg](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/Situation2.jpg?raw=true)
+
+As the picture , rad[i-k]'s range is the blackish green line . Because the black line is Palindrome and the blackish green line is in the black line , according to the acept of the Palindrome ,we can get that rad[i+k] = rad[i-k] easily.
+
+According to the situation we have talk , we can get that when rad[i]-k != rad[i-k] ,rad[i+k] = min(rad[i]-k,rad[i-k])。
+
+（3）rad[i]-k = rad[i-k]
+![Situation3.jpg](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/Situation3.jpg?raw=true)
+
+As the picture , after compare to the first situation , we can find that because the blackish line is in the black line , so even the orange line is equals , it can't cause a contradiction like situation 1 ,so the orange line can be equals . But , according to the message we know , we have not idear how long is the orange line , so we put the i to the i+k position , j=rad[i-k]\(because it's rad is at least rad[i-k]), wait to next loop to calculate it can expand out or not .
+
+
+时间复杂度 ： O(n) 。it looks like the program is use the nesting loop ,but actualy it only calculate the i which haven't calculated.
+空间复杂度 ： O(n) .
+
+
 If you have any suggestions to make the logic and implementation more better , or you have some advice on my description. Please let me know!Thanks!
-
-
-
-Question
-
-Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
-
-Example:
-
-Input: "babad"
-
-Output: "bab"
-
-Note: "aba" is also a valid answer.
-Example:
-
-Input: "cbbd"
-
-Output: "bb"
-Quick Navigation
-Summary
-Solution
-Approach #1 (Longest Common Substring) [Accepted]
-Approach #2 (Brute Force) [Time Limit Exceeded]
-Approach #3 (Dynamic Programming) [Accepted]
-Approach #4 (Expand Around Center) [Accepted]
-Approach #5 (Manacher's Algorithm) [Accepted]
-Summary
-
-This article is for intermediate readers. It introduces the following ideas: Palindrome, Dynamic Programming and String Manipulation. Make sure you understand what a palindrome means. A palindrome is a string which reads the same in both directions. For example,
-''aba''
-''aba'' is a palindome,
-''abc''
-''abc'' is not.
-
-Solution
-
-Approach #1 (Longest Common Substring) [Accepted]
-
-Common mistake
-
-Some people will be tempted to come up with a quick solution, which is unfortunately flawed (however can be corrected easily):
-
-Reverse SS and become S'S
-​′
-​​ . Find the longest common substring between SS and S'S
-​′
-​​ , which must also be the longest palindromic substring.
-This seemed to work, let’s see some examples below.
-
-For example,
-S
-=
-''caba"
-S=''caba",
-S
-′
-=
-''abac''
-S′=''abac''.
-
-The longest common substring between SS and S'S
-​′
-​​  is
-''aba''
-''aba'', which is the answer.
-
-Let’s try another example:
-S
-=
-''abacdfgdcaba''
-S=''abacdfgdcaba'',
-S
-′
-=
-''abacdgfdcaba''
-S′=''abacdgfdcaba''.
-
-The longest common substring between SS and S'S
-​′
-​​  is
-''abacd''
-''abacd''. Clearly, this is not a valid palindrome.
-
-Algorithm
-
-We could see that the longest common substring method fails when there exists a reversed copy of a non-palindromic substring in some other part of SS. To rectify this, each time we find a longest common substring candidate, we check if the substring’s indices are the same as the reversed substring’s original indices. If it is, then we attempt to update the longest palindrome found so far; if not, we skip this and find the next candidate.
-
-This gives us an O(n^2)O(n
-​2
-​​ ) Dynamic Programming solution which uses O(n^2)O(n
-​2
-​​ ) space (could be improved to use O(n)O(n) space). Please read more about Longest Common Substring here.
-
-Approach #2 (Brute Force) [Time Limit Exceeded]
-
-The obvious brute force solution is to pick all possible starting and ending positions for a substring, and verify if it is a palindrome.
-
-Complexity Analysis
-
-Time complexity : O(n^3)O(n
-​3
-​​ ). Assume that nn is the length of the input string, there are a total of \binom{n}{2} = \frac{n(n-1)}{2}(
-​2
-​n
-​​ )=
-​2
-​
-​n(n−1)
-​​  such substrings (excluding the trivial solution where a character itself is a palindrome). Since verifying each substring takes O(n)O(n) time, the run time complexity is O(n^3)O(n
-​3
-​​ ).
-
-Space complexity : O(1)O(1).
-
-Approach #3 (Dynamic Programming) [Accepted]
-
-To improve over the brute force solution, we first observe how we can avoid unnecessary re-computation while validating palindromes. Consider the case
-''ababa''
-''ababa''. If we already knew that
-''bab''
-''bab'' is a palindrome, it is obvious that
-''ababa''
-''ababa'' must be a palindrome since the two left and right end letters are the same.
-
-We define P(i,j)P(i,j) as following:
-
-P
-(
-i
-,
-j
-)
-=
-{
-true,
-if the substring
-S
-i
-…
-S
-j
- is a palindrome
-false,
-otherwise.
-
-P(i,j)={true,if the substring Si…Sj is a palindromefalse,otherwise.
-Therefore,
-
-P(i, j) = ( P(i+1, j-1) \text{ and } S_i == S_j ) P(i,j)=(P(i+1,j−1) and S
-​i
-​​ ==S
-​j
-​​ )
-
-The base cases are:
-
-P(i, i) = true P(i,i)=true
-
-P(i, i+1) = ( S_i == S_{i+1} ) P(i,i+1)=(S
-​i
-​​ ==S
-​i+1
-​​ )
-
-This yields a straight forward DP solution, which we first initialize the one and two letters palindromes, and work our way up finding all three letters palindromes, and so on...
-
-Complexity Analysis
-
-Time complexity : O(n^2)O(n
-​2
-​​ ). This gives us a runtime complexity of O(n^2)O(n
-​2
-​​ ).
-
-Space complexity : O(n^2)O(n
-​2
-​​ ). It uses O(n^2)O(n
-​2
-​​ ) space to store the table.
-
-Additional Exercise
-
-Could you improve the above space complexity further and how?
-
-Approach #4 (Expand Around Center) [Accepted]
-
-In fact, we could solve it in O(n^2)O(n
-​2
-​​ ) time using only constant space.
-
-We observe that a palindrome mirrors around its center. Therefore, a palindrome can be expanded from its center, and there are only 2n - 12n−1 such centers.
-
-You might be asking why there are 2n - 12n−1 but not nn centers? The reason is the center of a palindrome can be in between two letters. Such palindromes have even number of letters (such as
-''abba''
-''abba'') and its center are between the two
-'b'
-'b's.
-
-public String longestPalindrome(String s) {
-    int start = 0, end = 0;
-    for (int i = 0; i < s.length(); i++) {
-        int len1 = expandAroundCenter(s, i, i);
-        int len2 = expandAroundCenter(s, i, i + 1);
-        int len = Math.max(len1, len2);
-        if (len > end - start) {
-            start = i - (len - 1) / 2;
-            end = i + len / 2;
-        }
-    }
-    return s.substring(start, end + 1);
-}
-
-private int expandAroundCenter(String s, int left, int right) {
-    int L = left, R = right;
-    while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
-        L--;
-        R++;
-    }
-    return R - L - 1;
-}
-Complexity Analysis
-
-Time complexity : O(n^2)O(n
-​2
-​​ ). Since expanding a palindrome around its center could take O(n)O(n) time, the overall complexity is O(n^2)O(n
-​2
-​​ ).
-
-Space complexity : O(1)O(1).
-
-Approach #5 (Manacher's Algorithm) [Accepted]
-
-There is even an O(n)O(n) algorithm called Manacher's algorithm, explained here in detail. However, it is a non-trivial algorithm, and no one expects you to come up with this algorithm in a 45 minutes coding session. But, please go ahead and understand it, I promise it will be a lot of fun.

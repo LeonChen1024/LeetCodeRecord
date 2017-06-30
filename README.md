@@ -17,6 +17,8 @@ LeetCode 解决方法记录。
 | 2   | [Add Two Num](https://github.com/LeonChen/LeetCode-record/blob/master/2%20Add%20Two%20Num)| Medium       |
 | 3   | [Longest Substring Without Repeating Characters](https://github.com/LeonChen/LeetCode-record/tree/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters)| Medium       |
 | 4   | [Median of Two Sorted Arrays](https://github.com/LeonChen/LeetCode-record/tree/master/4.%20Median%20of%20Two%20Sorted%20Arrays)| Hard       |
+| 5   | [Longest Palindromic Substring](https://github.com/LeonChen1024/LeetCodeRecord/tree/master/5.%20Longest%20Palindromic%20Substring)| Medium       |
+
 
 
 ---

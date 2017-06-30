@@ -1,5 +1,6 @@
 
-[English ver]1. Two SumGiven an array of integers, return **indices** of the two numbers such that they add up to a specific target.
+[English ver]
+1. Two SumGiven an array of integers, return **indices** of the two numbers such that they add up to a specific target.
 You may assume that each input would have ***exactly*** one solution, and you may not use the *same* element twice.
 
 **Example:**
@@ -34,13 +35,13 @@ public class Solution {
 
 ```
 
-![wrong！！](https://github.com/LeonChen/LeetCode-record/blob/master/1%20Two%20Sum/Images/WrongResult.png?raw=true)
+![wrong！！](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/1%20Two%20Sum/Images/WrongResult.png?raw=true)
 
 I did not understand the meaning of problem , the last we get by this solution are the index of the array which we created , rather than the requirements of the index of he gave , fainted. . . Later  i had found a more serious problem. . The problem did not say there can not be negative number ! . . . It is not necessary to determine whether the value of the array is bigger than the target number. . .
 
 And then i re-think about it, the first solution is a basic way.
 
-####Approach 1：Brute Force
+#### Approach 1：Brute Force
 ```
 public class Solution {
     public int[] twoSum(int[] nums, int target) {
@@ -58,15 +59,15 @@ public class Solution {
 
 for the results,uh Well, the simplest solution often means the less efficient way.
 
-![efficiency ](https://github.com/LeonChen/LeetCode-record/blob/master/1%20Two%20Sum/Images/BruteForceResult.png?raw=true)
+![efficiency ](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/1%20Two%20Sum/Images/BruteForceResult.png?raw=true)
 
 **Analysis**
-The principle of this method is very simple, Loop through each element x and find if there is another value that plus x and then equals to target . you have to attention to " K = i + 1" of "  for(int k=i+1;k<nums.length;k++) " is in order to  avoid the previous looped of the situation looped again.
+The principle of this method is very simple, Loop through each element x and find if there is another value that plus x and then equals to target . you have to attention to "K = i + 1" of "for(int k=i+1;k<nums.length;k++)" is in order to  avoid the previous looped of the situation looped again.
 
 Time complexity: O (n ^ 2). For each element, we try to find its complement by looping through the rest of array which takes O(n). so it is n ^ 2.
 Space complexity: O (1).
 
-####Approach 2 Two-pass Hash Table
+#### Approach 2 Two-pass Hash Table
 
 ```
 public class Solution {
@@ -87,14 +88,14 @@ public class Solution {
 ```
 You can see the efficiency has been greatly improved.
 
-![efficiency ](https://github.com/LeonChen/LeetCode-record/blob/master/1%20Two%20Sum/Images/Twopassresult.png?raw=true)
+![efficiency ](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/1%20Two%20Sum/Images/Twopassresult.png?raw=true)
 
 **Analysis**
 The principle of this method is to use the hash table to replace the time cost of space costs, a complexity of O(n) change into near O(1) , why should i use "near", because if the hash table has a lot Of collision occurredthe, it will lead to complexity to near O(n) . We use the value of each element in the array as a key into the hash table, and its index number as the key's value into the hash table, and then traverse the array to find whether there is a corresponding value in the hash table key, if we find that, get the key's value .
 Time complexity: O (n)
 Space complexity: O (n)
 
-####Approach 3 One-pass Hash Table
+#### Approach 3 One-pass Hash Table
 
 ```
 public class Solution {
@@ -114,7 +115,7 @@ public class Solution {
 
 The efficiency is slightly improved.  But i can't accept that how is it just in the middle efficiency of the whole approach. . . And then i tried several times, it is always in the about 40% to 50% position, these methods in front of this solution's position how can they work?. . . Why so fast? Theoretically, it is necessary to loop the results at least once, that is, the complexity of O (n) is required.
 
-![efficiency](https://github.com/LeonChen/LeetCode-record/blob/master/1%20Two%20Sum/Images/One-pass_result.png?raw=true)
+![efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/1%20Two%20Sum/Images/One-pass_result.png?raw=true)
 
 **Analysis**
 The principle of this method actually is an improvement of the method two, because we do not need to put all the arrays into the hash table, what we need is to get the sum of two number which equals to the number of the target number , so we check if current element's complement already exists in the table when we put the array's element into the hash table , once we find the required value we stop the loop.
