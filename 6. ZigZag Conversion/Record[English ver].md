@@ -16,200 +16,168 @@ convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
 
 ---
 
-I have misunderstood the meaning of the word palindrome , i thought it was the meaning of repeat,finally i know that it was the meaning of a string which is the same when you look from left to right and from right to left.
-According to that , we know it has two situation,one the length is odd , another is even .
+First we need to know the meaning about the zigzag pattern, it means a pattern made up of small corners at variable angles, though constant within the zigzag, tracing a path between two parallel lines; it can be described as both jagged and fairly regular. In the begining i think it's one line in the middle and then some symmetry verticle line between the middle horizontal line,when the number of rows is 4(use number to represent the index of the String)it would look like that:
 
-### Approach 1 :
-``` java
-public class Solution {
-       private int lo, maxLen;
-
-       public String longestPalindrome(String s) {
-           int len = s.length();
-           if (len < 2)
-               return s;
-
-           for (int i = 0; i < len - 1; i++) {
-               extendPalindrome(s, i, i);  //assume odd length, try to extend Palindrome as possible
-               extendPalindrome(s, i, i + 1); //assume even length.
-           }
-           return s.substring(lo, lo + maxLen);
-       }
-
-       private void extendPalindrome(String s, int j, int k) {
-           while (j >= 0 && k < s.length() && s.charAt(j) == s.charAt(k)) {
-               j--;
-               k++;
-           }
-           if (maxLen < k - j - 1) {
-               lo = j + 1;
-               maxLen = k - j - 1;
-           }
-       }
-   }
+```
+1   7    13
+2   8    14
+3 6 9 12 15
+4   10   16
+5   11   17
+```
+but the trueth is not , it should be looked like that:
+```
+1     7        13
+2   6 8     12 14
+3 5   9  11    15
+4     10       16
 ```
 
-![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/SuccessResult1.png?raw=true)
-
-**Analysis**
-This method divided the problem into two situation.First we loop the every char of the String,each char call the extendPalindrome method .The extendPalindrome method is used to find the char of corresponding position is the same or not . if so we move the index of the left char to left one ,and the right char to right one,and then repeat this procedure.
-
-Time complexity ： O(n^2) 。n is the length of the string.
-Space complexity ： O(n) .
-
-### Approach 2 :
-
+### Approach 1 use String[]:
 ``` java
 public class Solution {
-    public String longestPalindrome(String s) {
-        String res = "";
-        int currLength = 0;
-        for(int i=0;i<s.length();i++){
-            if(isPalindrome(s,i-currLength-1,i)){
-                res = s.substring(i-currLength-1,i+1);
-                currLength = currLength+2;
-            }
-            else if(isPalindrome(s,i-currLength,i)){
-                res = s.substring(i-currLength,i+1);
-                currLength = currLength+1;
-            }
+    public String convert(String s, int numRows) {
+        String result = "";
+        String[] strings = new String[numRows];
+        for (int i =0;i<numRows;i++){
+            strings[i] = "";
         }
-        return res;
-    }
+        int position = 0 ;
+        int numRowsIndex = numRows-1;
+        int step = 1;
+        //if the numRows is one ,or the s's length is less than numRows ,return s .
+        if (numRows ==1 || s.length()<numRows){
+            return s;
+        }
+        //loop the every char in the String, when the position is 0,the step is one ,is the position is numRowsIndex,the step is negative one
+        for (int i =0;i<s.length();i++){
+            strings[position] += s.charAt(i);
+            if (position ==0){
+               step = 1;
+            }
+            if (position == numRowsIndex ){
+                step = -1;
+            }
+            position = position+step;
+        }
 
-    public boolean isPalindrome(String s, int begin, int end){
-        if(begin<0) return false;
-        while(begin<end){
-        	if(s.charAt(begin++)!=s.charAt(end--)) return false;
+        for (int i =0;i<numRows;i++){
+            result += strings[i];
         }
-        return true;
+
+        return result;
     }
 }
-
 ```
 
-![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/SuccessResult2.png?raw=true)
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/6.%20ZigZag%20Conversion/Images/StringsResult.png?raw=true)
 
 **Analysis**
-This method is when then index move to right , we used the char of this index as the end of the substring which length is current length +1 or current length +2, and see if is the Palindrome string .
+This method put every line's String into the String[i] accordingly,in the last concate it together and then we get the result we want . When the position is in the first row , next time the position should move down,so step = 1.When the position is in the last Row , next time the position should move up , so the step = -1.
 
-Time complexity ： O(n^2) 。n is the length of the string.
+Time complexity ： O(n) 。n is the length of the string.
+Space complexity ： O(n) .
+
+### Approach 2 StringBuilder[]:
+
+``` java
+public class Solution {
+    public String convert(String s, int numRows) {
+        StringBuilder result = new StringBuilder("");
+        StringBuilder[] strings = new StringBuilder[numRows];
+        for (int i =0;i<numRows;i++){
+            strings[i] = new StringBuilder("");
+        }
+        int position = 0 ;
+        int numRowsIndex = numRows-1;
+        int step = 1;
+          //if the numRows is one ,or the s's length is less than numRows ,return s .
+        if (numRows ==1 || s.length()<numRows){
+            return s;
+        }
+          //loop the every char in the String, when the position is 0,the step is one ,is the position is numRowsIndex,the step is negative one
+        for (int i =0;i<s.length();i++){
+            strings[position].append(s.charAt(i));
+            if (position ==0){
+               step = 1;
+            }
+            if (position == numRowsIndex ){
+                step = -1;
+            }
+            position = position+step;
+        }
+
+        for (int i =0;i<numRows;i++){
+            result.append(strings[i]);
+        }
+        return result.toString();
+    }
+}
+```
+
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/6.%20ZigZag%20Conversion/Images/StringBuilderResult.png?raw=true)
+
+**Analysis**
+This method's principle is the same as the Approach 1 , it just replace the String into StringBuilder,it has a big optimization.
+
+Time complexity ： O(n) 。n is the length of the string.
 Space complexity ： O(n) .
 
 
-### Approach 3 (Manacher's Algorithm)
+### Approach 3 use interval
 
 ```java
 public class Solution {
-    public String longestPalindrome(String s) {
-      char[] str = changeString(s);
-		  String result = manacher(str,s);
+    public String convert(String s, int numRows) {
 
-		  return result;
-}
+        String result="";
+        if(numRows==1)
+            return s;
+        int step1,step2;
+        int len=s.length();
+        for(int i=0;i<numRows;++i){
+            step1=(numRows-i-1)*2;
+            step2=(i)*2;
+            int pos=i;
+            if(pos<len)
+                result+=s.charAt(pos);
+            while(true){
+                pos+=step1;
+                if(pos>=len)
+                    break;
+                if(step1>0)
+                    result+=s.charAt(pos);
+                pos+=step2;
+                if(pos>=len)
+                    break;
+                if(step2>0)
+                    result+=s.charAt(pos);
+            }
+        }
+        return result;
 
-/**
-	 * 返回例如 #a#c#b#c#a#a#c#b#c#d#形式的字符串数组
-	 *
-	 * @param s
-	 * @return
-	 */
-	public static char[] changeString(String s)
-	{
-	    char[] str = new char[s.length() * 2 + 1];
-
-	    int i = 0;
-	    for (; i < s.length(); i++)
-	    {
-	        str[2 * i] = '#';
-	        str[2 * i + 1] = s.charAt(i);
-	    }
-	    str[2 * i] = '#';
-
-	    return str;
-	}
-
-	/**
-	 * manacher 算法实现找到回文字符串最长的一个
-	 */
-	public static String manacher(char[] s,String olds)
-	{
-		  String result = "";
-	    int rad[] = new int[s.length];
-	    int start = 0;
-	    int end = 0;
-	    //i index,j 回文半径，k
-	    int i = 1, j = 0, k;
-
-	    // 记录最长的回文串的长度
-	    int maxLen = 0;
-	    while (i < s.length)
-	    {
-	        // 扫描得出rad值
-	        while (i - j - 1 > -1 && i + j + 1 < s.length
-	                && s[i - j - 1] == s[i + j + 1]) {
-	        	  j++;
-	        }
-
-	        if (maxLen < j ) {
-				        maxLen =j;
-				        start = i - j  ;
-				        end =i + j ;
-
-			       }
-	        rad[i] = j;
-	        maxLen = maxLen > j ? maxLen : j;
-
-	        k = 1;
-          //当回文中包含子回文，看子回文是否超出父回文边界。 分三种情况。
-	        while (k <= rad[i] && rad[i - k] != rad[i] - k)
-	        {
-	            rad[i + k] = Math.min(rad[i - k], rad[i] - k);
-	            k++;
-	        }
-	        i = i + k;
-	        j = Math.max(j - k, 0);
-	    }
-
-	    result = olds.substring(start/2,end/2);
-	    return result;
-
-	}
-
+    }
 }
 
 ```
 
 **Analysis**
 
-In this question,the Palindrome has two situation, one is even Palindrome , another is odd Palindrome. In order to combine them into one situation, we can add a special char like '#' between every two char of the string which is neaby ,and the begining and the ending of the string . like  "#a#b#b#c#a#". Now we have combine the two situation into together.
+```
+/*n=numRows
+Δ=2n-2    1                           2n-1                         4n-3
+Δ=        2                     2n-2  2n                    4n-4   4n-2
+Δ=        3               2n-3        2n+1              4n-5       .
+Δ=        .           .               .               .            .
+Δ=        .       n+2                 .           3n               .
+Δ=        n-1 n+1                     3n-3    3n-1                 5n-5
+Δ=2n-2    n                           3n-2                         5n-4
+*/
+```
+This method used regular interval to calculate position .
 
-In the String s ,we use rad[i] to represent the Palindrome radius of index i , we can get s[i-rad[i],i-1] = s[i+1,i+rad[i]] easily , once we get the all the rad of the String , we get the all the Palindrome which is even length .
-
-when we get the value of rad[1..i-1],and get the rad value of the char i is at least j through compare char which is symmetry.Now we suppose that we have a index k , it start from 1 to rad[i],we can use it to get the rad valule of the [i+1,i+rad[i]].
-
-According to the acept of the Palindrome , we know the part of the black is a Palindrome, two parts of the red have the same length.
-Because we have calculate the value of rad[i-k],so we can use it . There are three situations:
-(1)rad[i]-k < rad[i-k]
-![Situation1.jpg](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/Situation1.jpg?raw=true)
-
-As the picture , rad[i-k]'s range is blackish green line . Because of the black line is Palindrome,and a part of blackish green line is out of the black line,so rad[i+k] is at least rad[i]-k (the orange line).Is there have any possible that rad[i+k] is larger than rad[i]-k? it's impossible ,according to the acept of the Palindrome ,we know that if the part out of the orange line is the Palindrome , than the black line can expand outward. Is different from the suppose we have done . so rad[i+k] = rad[i]-k。
-
-（2）rad[i]-k > rad[i-k]
-![Situation2.jpg](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/Situation2.jpg?raw=true)
-
-As the picture , rad[i-k]'s range is the blackish green line . Because the black line is Palindrome and the blackish green line is in the black line , according to the acept of the Palindrome ,we can get that rad[i+k] = rad[i-k] easily.
-
-According to the situation we have talk , we can get that when rad[i]-k != rad[i-k] ,rad[i+k] = min(rad[i]-k,rad[i-k])。
-
-（3）rad[i]-k = rad[i-k]
-![Situation3.jpg](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Images/Situation3.jpg?raw=true)
-
-As the picture , after compare to the first situation , we can find that because the blackish line is in the black line , so even the orange line is equals , it can't cause a contradiction like situation 1 ,so the orange line can be equals . But , according to the message we know , we have not idear how long is the orange line , so we put the i to the i+k position , j=rad[i-k]\(because it's rad is at least rad[i-k]), wait to next loop to calculate it can expand out or not .
-
-
-时间复杂度 ： O(n) 。it looks like the program is use the nesting loop ,but actualy it only calculate the i which haven't calculated.
-空间复杂度 ： O(n) .
+Time complexity ： O(n) 。n is the length of the string.
+Space complexity ： O(n) .
 
 
 If you have any suggestions to make the logic and implementation more better , or you have some advice on my description. Please let me know!Thanks!
