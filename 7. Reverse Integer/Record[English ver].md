@@ -60,7 +60,7 @@ public class Solution {
 	}
 ```
 
-![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/6.%20ZigZag%20Conversion/Images/StringsResult.png?raw=true)
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/7.%20Reverse%20Integer/Images/StringBuilderResult.png?raw=true)
 
 **Analysis**
 This approach turn Integer to a positive Integer and reverse it with StringBuilder. use try catch to deal with the overflows . if the input is negative , we can change the result to negative in last.
@@ -115,7 +115,7 @@ public class Solution2 {
 }
 ```
 
-![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/6.%20ZigZag%20Conversion/Images/StringBuilderResult.png?raw=true)
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/7.%20Reverse%20Integer/Images/IntResult.png?raw=true)
 
 **Analysis**
 These two Solution has the same principle . They use the input x%10 to get the remainder which is the last digit of the x, and then use result*10 to add a digit to result and update the last digit to the x%10 , after that update x to x/10.

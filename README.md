@@ -1,11 +1,8 @@
 # LeetCode-record
-have English version and Chinese version
 
-### [English ver] my LeetCode record.
 A LeetCode Solution Record .
 
-### [Chinese ver]我的LeetCode记录
-LeetCode 解决方法记录。
+[中文版](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/README[Chinese].md)
 
 ---
 
@@ -13,13 +10,13 @@ LeetCode 解决方法记录。
 
 |  #  | Title                           |  Difficulty  |
 | --- | ---                             | ----------   |
-| 1   | [Two Sum](https://github.com/LeonChen/LeetCode-record/tree/master/1%20Two%20Sum) |   Easy       |
-| 2   | [Add Two Num](https://github.com/LeonChen/LeetCode-record/blob/master/2%20Add%20Two%20Num)| Medium       |
-| 3   | [Longest Substring Without Repeating Characters](https://github.com/LeonChen/LeetCode-record/tree/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters)| Medium       |
-| 4   | [Median of Two Sorted Arrays](https://github.com/LeonChen/LeetCode-record/tree/master/4.%20Median%20of%20Two%20Sorted%20Arrays)| Hard       |
-| 5   | [Longest Palindromic Substring](https://github.com/LeonChen1024/LeetCodeRecord/tree/master/5.%20Longest%20Palindromic%20Substring)| Medium       |
-| 6   | [ZigZag Conversion](https://github.com/LeonChen1024/LeetCodeRecord/tree/master/6.%20ZigZag%20Conversion)| Medium       |
-
+| 1   | [Two Sum](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/1%20Two%20Sum/Record%5BEnglish%20ver%5D.md) |   Easy       |
+| 2   | [Add Two Num](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/2%20Add%20Two%20Num/Record%5BEnglish%20ver%5D.md)| Medium       |
+| 3   | [Longest Substring Without Repeating Characters](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/3.%20Longest%20Substring%20Without%20Repeating%20Characters/Record%5BEnglish%20ver%5D.md)| Medium       |
+| 4   | [Median of Two Sorted Arrays](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/4.%20Median%20of%20Two%20Sorted%20Arrays/Record%5BEnglish%20ver%5D.md)| Hard       |
+| 5   | [Longest Palindromic Substring](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/5.%20Longest%20Palindromic%20Substring/Record%5BEnglish%20ver%5D.md)| Medium       |
+| 6   | [ZigZag Conversion](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/6.%20ZigZag%20Conversion/Record%5BEnglish%20ver%5D.md)| Medium       |
+| 7   | [Reverse Integer](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/7.%20Reverse%20Integer/Record%5BEnglish%20ver%5D.md)| Easy       |
 
 ---
 
