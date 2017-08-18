@@ -1,5 +1,5 @@
 
-[English ver]Easy
+[English ver]
 # 8. String to Integer (atoi)
 Implement atoi to convert a string to an integer.
 
@@ -109,7 +109,7 @@ public class Solution2 {
 ```
 
 
-![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/tree/master/8.%20String%20to%20Integer%20(atoi)/Images/OneResult.png?raw=true)
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/8.%20String%20to%20Integer%20(atoi)/Images/OneResult.png?raw=true)
 
 **Analysis**
 

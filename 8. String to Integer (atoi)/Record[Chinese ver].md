@@ -105,7 +105,7 @@ public class Solution2 {
 
 ```
 
-![效率](https://github.com/LeonChen1024/LeetCodeRecord/tree/master/8.%20String%20to%20Integer%20(atoi)/Images/OneResult.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/8.%20String%20to%20Integer%20(atoi)/Images/OneResult.png?raw=true)
 
 **分析**
 这两段代码的原理是大致相同的，主要区别就是判断溢出的方式，第一个使用的 long 和 Integer 的区间进行比较来判断是否溢出；第二个使用的是 Int ，但是不能直接和 Integer 的区间进行比较，因为Int 的数据一旦溢出会被处理掉，不会出现区间外的值，所以是将前一次得到的 Int 值和 Max／10 比较，然后将这次取得的数值和 Max%10进行比较
