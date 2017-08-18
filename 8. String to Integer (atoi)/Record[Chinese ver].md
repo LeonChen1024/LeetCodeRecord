@@ -10,84 +10,59 @@
 ---
 
 atoi 的要求：
-函数首先丢弃所有首个非空格字符之前的所有空格。然后从这个字符开始，
-The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.
+函数首先丢弃所有首个非空格字符之前的所有空格。然后从这个字符开始，得到一个初始化的加号或减号开始的尽可能多的位数，然后将他们转换成数字值。
 
-The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.
+这个字符串在数字形式的子字符串后可以有其他的字符，这些字符将会被忽略而且不会对这个方法有影响。
 
-If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.
+如果第一个非空格的字符序列不是一个合法的整数，或者如果并没有符合要求的序列比如字符串是空的或者它只包含了空格字符，不执行转化。
 
-If no valid conversion could be performed, a zero value is returned. If the correct value is out of the range of representable values, INT_MAX (2147483647) or INT_MIN (-2147483648) is returned.
+如果不能执行转换，返回0.如果正确值超出了可以描述的值范围，返回 INT_MAX (2147483647) 或者 INT_MIN (-2147483648).
 ---
 
-### 方法一 使用StringBuilder：
-
+### 方法一 :
 ``` java
 public class Solution {
+    public int myAtoi(String str) {
+        int index = 0 , sign = 1 ;
+        long result = 0 ;
 
-	    public int reverse(int x) {
-          //judge x is negative or not
-	        boolean isNegative = false;
-	        int result =0;
-	        if (x<0){
-	            isNegative = true;
-	            x = Math.abs(x);
-	        }
+				//if str is a empty string or null
+        if (str.equals(null)||str.length()==0 ){
+            return 0;
+        }
 
-	        StringBuilder oldSB = new StringBuilder(String.valueOf(x));
-	        StringBuilder newSB = new StringBuilder();
-          //reverse the x use StringBuilder
-	        for (int i = 0;i < oldSB.length() ; i++){
-	            newSB.append(oldSB.charAt(oldSB.length()-i-1));
-	        }
+				//remove the ' ' in the front
+        while (str.charAt(index)==' '&&index < str.length()){
+            index++;
+        }
 
-	        try{
-	            result = Integer.valueOf(newSB.toString());
-	        }
-	        catch(Exception e){
-              //if overflows return the result 0
-	            return result;
-	        }
-	        if (isNegative){
-	            result = -result;
-	        }
+				//take the sign
+        if(str.charAt(index)=='+'||str.charAt(index)=='-'){
+            sign = str.charAt(index)=='+' ? 1 : -1;
+            index ++;
+        }
 
-	        return result;
-	    }
-	}
-```
+				//convert number and avoid overflows
+        while (index < str.length()){
 
-![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/7.%20Reverse%20Integer/Images/StringBuilderResult.png?raw=true)
+            if(str.charAt(index)<='9'&&str.charAt(index)>='0'){
+                int current = str.charAt(index)-'0';
+                result = result * 10 + current;
+								// check if the str is overflows
+                if(result>Integer.MAX_VALUE&&sign==1){
+                    return Integer.MAX_VALUE;
+                }else if(-result<Integer.MIN_VALUE&&sign==-1){
+                    return Integer.MIN_VALUE;
+                }
+                index++;
+            }else {
+                break;
+            }
+        }
 
-**分析**
-这个方法使用StringBuilder 将 Integer 转换成正数进行颠倒的操作，使用 try catch 来处理溢出的情况。如果输入是负数，最后的结果在转为负数。
-时间复杂度 ： O(n) 。n是输入的位数
-空间复杂度 ： O(1) .
+        return sign*((int)result);
 
-### 方法二 使用int：
-
-``` java
-public class Solution1 {
-   public int reverse(int x)
-	{
-	    int result = 0;
-
-	    while (x != 0)
-	    {
-          //get the last digit of the x.
-	        int tail = x % 10;
-          //add a digit in the end of the newResult ,and update the newResult's last digit
-	        int newResult = result * 10 + tail;
-          //judge if newResult is overflows
-	        if ((newResult - tail) / 10 != result)
-	        { return 0; }
-	        result = newResult;
-          //remove the last digit of x
-	        x = x / 10;
-	    }
-
-	    return result;
-	}
+    }
 }
 
 ```
@@ -97,28 +72,43 @@ public class Solution1 {
 
 ``` java
 public class Solution2 {
-  public int reverse(int x) {
-        long rev= 0;
-        while( x != 0){
-            //add a digit in the end of the newResult ,and update the newResult's last digit
-            rev= rev*10 + x % 10;
-            //remove the last digit of x
-            x= x/10;
-            //judge if newResult is overflows
-            if( rev > Integer.MAX_VALUE || rev < Integer.MIN_VALUE)
-                return 0;
-        }
-        return (int) rev;
+	public int myAtoi(String str) {
+    int index = 0, sign = 1, total = 0;
+    //1. Empty string
+    if(str.length() == 0) return 0;
+
+    //2. Remove Spaces
+    while(str.charAt(index) == ' ' && index < str.length())
+        index ++;
+
+    //3. Handle signs
+    if(str.charAt(index) == '+' || str.charAt(index) == '-'){
+        sign = str.charAt(index) == '+' ? 1 : -1;
+        index ++;
     }
+
+    //4. Convert number and avoid overflow
+    while(index < str.length()){
+        int digit = str.charAt(index) - '0';
+        if(digit < 0 || digit > 9) break;
+
+        //check if total will be overflow after 10 times and add digit
+        if(Integer.MAX_VALUE/10 < total || Integer.MAX_VALUE/10 == total && Integer.MAX_VALUE %10 < digit)
+            return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+
+        total = 10 * total + digit;
+        index ++;
+    }
+    return total * sign;
+}
 }
 
 ```
 
-![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/7.%20Reverse%20Integer/Images/IntResult.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/tree/master/8.%20String%20to%20Integer%20(atoi)/Images/OneResult.png?raw=true)
 
 **分析**
-这两个方法的原理都是一样的，通过将输入的x%10取余数得到最后一位数的值，然后使用 result*10 将result 增加一位并将最后一位更新为余数值，然后更新x为x/10。
-这两个方法不同的地方是判断溢出的方法，Solution1 在更新 result 之后将新的 result 去掉最后一位和旧的 result 进行比较，看是否一致来判断是否溢出。Solution2 则是将新的 result 和 Integer 的临界值进行比较来判断是否溢出，要注意的是 Solution2 里的 long rev= 0; 一定不能使用 Integer ，因为一旦 Integer 溢出了 rev 就会被自动处理溢出，所以  rev > Integer.MAX_VALUE || rev < Integer.MIN_VALUE 永远不会为true。
+这两段代码的原理是大致相同的，主要区别就是判断溢出的方式，第一个使用的 long 和 Integer 的区间进行比较来判断是否溢出；第二个使用的是 Int ，但是不能直接和 Integer 的区间进行比较，因为Int 的数据一旦溢出会被处理掉，不会出现区间外的值，所以是将前一次得到的 Int 值和 Max／10 比较，然后将这次取得的数值和 Max%10进行比较
 
 时间复杂度 ： O(n) 。n是输入的位数
 空间复杂度 ： O(1) .
