@@ -42,7 +42,7 @@ public boolean isPalindrome(int x) {
 }
 ```
 
-![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/8.%20String%20to%20Integer%20(atoi)/Images/OneResult.png?raw=true)
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/9.%20Palindrome%20Number/Images/RevertNumber1Result.png?raw=true)
 
 **Analysis**
 Because of the case overflows ,so revert the whole x except the largest digit , and then compare reverted Number with x which except the smallest digit , at last campare the biggest digit and the smallest digit.
@@ -81,7 +81,7 @@ class Solution {
 ```
 
 
-![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/8.%20String%20to%20Integer%20(atoi)/Images/OneResult.png?raw=true)
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/9.%20Palindrome%20Number/Images/RevertNumberResult.png?raw=true)
 
 **Analysis**
 
