@@ -48,7 +48,7 @@ class Solution {
 }
 ```
 
-![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/9.%20Palindrome%20Number/Images/RevertNumber1Result.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/10.%20Regular%20Expression%20Matching/Images/RecursionResult.png?raw=true)
 
 **分析**
 使用递归是一种比较易懂的方式，首先将他们的第一位进行比较，有这几种情况，如果pattern下一位是‘\*’，那么它可以舍弃或保留这两位的比较情况。更新text 和 pattern 后继续按位比较即可得出结果。
@@ -121,7 +121,9 @@ class Solution {
 }
 ```
 
-![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/9.%20Palindrome%20Number/Images/RevertNumberResult.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/10.%20Regular%20Expression%20Matching/Images/TopDownResult.png?raw=true)
+
+
 
 Bottom-Up Variation
 自底向上
@@ -148,7 +150,7 @@ class Solution {
 }
 ```
 
-![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/9.%20Palindrome%20Number/Images/RevertNumberResult.png?raw=true)
+![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/10.%20Regular%20Expression%20Matching/Images/BottomUpResult.png?raw=true)
 
 
 

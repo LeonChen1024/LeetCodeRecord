@@ -20,7 +20,7 @@ LeetCode 解决方法记录。
 | 8   | [8. String to Integer (atoi)](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/8.%20String%20to%20Integer%20(atoi)/Record%5BChinese%20ver%5D.md)| Medium       |
 | 9   | [9. Palindrome Number](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/9.%20Palindrome%20Number/Record%5BChinese%20ver%5D.md
 )| Easy       |
-| 10   | [Regular Expression Matching]()| Hard       |
+| 10   | [Regular Expression Matching](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/10.%20Regular%20Expression%20Matching/Record%5BChinese%20ver%5D.md)| Hard       |
 
 
 ---

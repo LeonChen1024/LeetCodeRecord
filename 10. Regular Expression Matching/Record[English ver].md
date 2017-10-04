@@ -49,7 +49,7 @@ class Solution {
 }
 ```
 
-![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/9.%20Palindrome%20Number/Images/RevertNumber1Result.png?raw=true)
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/10.%20Regular%20Expression%20Matching/Images/RecursionResult.png?raw=true)
 
 **Analysis**
 Use recursion is a easy way to understand , first we compare the first digit , there are some situation , if the pattern's next digit is '\*' ,then it could be discard or keep the result of these two digit . update text and pattern and then keep camparing the digit of text and pattern .
@@ -122,6 +122,8 @@ class Solution {
 }
 ```
 
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/10.%20Regular%20Expression%20Matching/Images/TopDownResult.png?raw=true)
+
 Bottom-Up Variation
 ``` java
 class Solution {
@@ -146,7 +148,7 @@ class Solution {
 }
 ```
 
-![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/9.%20Palindrome%20Number/Images/RevertNumberResult.png?raw=true)
+![Efficiency](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/10.%20Regular%20Expression%20Matching/Images/BottomUpResult.png?raw=true)
 
 **Analysis**
 
