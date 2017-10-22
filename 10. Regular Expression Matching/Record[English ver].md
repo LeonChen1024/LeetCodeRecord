@@ -77,7 +77,7 @@ Even P and T only request for O( T + P  ) unique suffixes .
 
 ```
 
-The calculation of time complexity and space complexity i don't understand yet , if you know about that please tell me ,thanks !
+//Todo complexity 
 
 ## Approach 2 Dynamic Programming:
 
