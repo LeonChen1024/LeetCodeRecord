@@ -21,6 +21,7 @@ LeetCode 解决方法记录。
 | 9   | [9. Palindrome Number](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/9.%20Palindrome%20Number/Record%5BChinese%20ver%5D.md
 )| Easy       |
 | 10   | [Regular Expression Matching](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/10.%20Regular%20Expression%20Matching/Record%5BChinese%20ver%5D.md)| Hard       |
+| 11   | [Container With Most Water](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/11.%20Container%20With%20Most%20Water/Record%5BChinese%20ver%5D.md)| Medium       |
 
 
 ---
