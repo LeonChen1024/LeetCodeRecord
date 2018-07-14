@@ -1,6 +1,12 @@
+# [English ver]1 Two Sum
 
-[English ver]
-1. Two SumGiven an array of integers, return **indices** of the two numbers such that they add up to a specific target.
+
+
+[TOC]
+
+## Question
+
+Two SumGiven an array of integers, return **indices** of the two numbers such that they add up to a specific target.
 You may assume that each input would have ***exactly*** one solution, and you may not use the *same* element twice.
 
 **Example:**
@@ -41,7 +47,8 @@ I did not understand the meaning of problem , the last we get by this solution a
 
 And then i re-think about it, the first solution is a basic way.
 
-#### Approach 1：Brute Force
+## Approach 1：Brute Force
+
 ```
 public class Solution {
     public int[] twoSum(int[] nums, int target) {
@@ -67,7 +74,7 @@ The principle of this method is very simple, Loop through each element x and fin
 Time complexity: O (n ^ 2). For each element, we try to find its complement by looping through the rest of array which takes O(n). so it is n ^ 2.
 Space complexity: O (1).
 
-#### Approach 2 Two-pass Hash Table
+## Approach 2 Two-pass Hash Table
 
 ```
 public class Solution {
@@ -95,7 +102,7 @@ The principle of this method is to use the hash table to replace the time cost o
 Time complexity: O (n)
 Space complexity: O (n)
 
-#### Approach 3 One-pass Hash Table
+## Approach 3 One-pass Hash Table
 
 ```
 public class Solution {

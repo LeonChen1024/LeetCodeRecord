@@ -1,5 +1,20 @@
+# [Chinese ver]1 Two Sum
 
-[Chinese ver]1 Two Sum
+[TOC]
+
+---
+title: LeetCode 1 Two Sum [Chinese ver]
+date: 2017-02-17 
+tags:
+- Chinese
+- Algorithm
+- LeetCode
+category:
+- [Chinese,Algorithm,LeetCode]
+thumbnail: /2017/02/17/1-Two-Sum/Record[Chinese ver]/picThumb.jpg
+---
+
+## Question
 
 两数求和 。给定一个整数的数组，返回两个数字的索引使得这两个数字加起来成为一个指定的目标值。
 你可以假设每个输入都至少有一个解决方案，并且你不能使用相同的元素两次。
@@ -42,7 +57,8 @@ public class Solution {
 没理解好题意，这种解法最后得到的是我们自定义数组的序号，而不是题目要求的序号，晕倒。。。后来发现一个更严重的问题。。他没有说过不能有负数！！！！也就不需要判断数组里的值是否大于和。。。
 
 然后重新构思一下，先来个基本的解法
-#### 方法一：暴力循环
+## 方法一：暴力循环
+
 ``` java
 public class Solution {
     public int[] twoSum(int[] nums, int target) {
@@ -66,7 +82,7 @@ public class Solution {
 时间复杂度 ： O(n^2) 。n个元素都要循环遍历数组内其余的元素，所以是n^2。
 空间复杂度 ： O(1) .
 
-#### 方法二：两次循环的 hash table
+## 方法二：两次循环的 hash table
 
 ``` java
 public class Solution {
@@ -94,7 +110,7 @@ public class Solution {
 时间复杂度 ： O(n)
 空间复杂度 ： O(n)
 
-#### 方法三：一次循环的 hash table
+## 方法三：一次循环的 hash table
 
 ``` java
 public class Solution {
