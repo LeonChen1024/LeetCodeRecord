@@ -77,3 +77,15 @@ public class Solution {
 ![效率](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/2%20Add%20Two%20Num/Images/method2result.png?raw=true)
 
 这个是别人的做法，居然能够比方法一快了许多，说实话，其实这两个方法在整体思路上是差不多的，至于为什么会比前者快那么多我觉的是方法一在循环中不断新建了x,y等对象，由于计时时用了成千上百的例子验证所以导致了20ms左右的差距。以上纯属个人看法，如果你有更正确的想法，或者哪里有有关这种差距的论证，请告诉我。谢谢。
+
+
+
+## About Me
+
+我的博客 [leonchen1024.com](http://leonchen1024.com/)
+
+我的 GitHub [https://github.com/LeonChen1024](https://github.com/LeonChen1024)
+
+微信公众号 
+
+![wechat](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/Images/CooderQRcodem.jpg?raw=false)

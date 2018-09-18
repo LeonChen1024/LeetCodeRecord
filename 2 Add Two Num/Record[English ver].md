@@ -1,3 +1,6 @@
+[English ver]
+
+## 2. Add Two Numbers
 
 Question ：You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
 You may assume the two numbers do not contain any leading zero, except the number 0 itself.
@@ -72,3 +75,11 @@ public class Solution {
 ![Efficience](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/2%20Add%20Two%20Num/Images/method2result.png?raw=true)
 
 This is someone else's approach, actually these two methods in the overall thinking is almost the same ,but this approach is more faster than approach 1 . why ? I think the approach 1 is always create a int x,y and other objects in the cycle , because the timing was based on thousands of examples , result a gap about 20ms. This is purely personal think , if you have more correct ideas, or somewhere is an argument about the reason this gap, please tell me. Thank you.
+
+
+
+## About Me
+
+My blog [leonchen1024.com](http://leonchen1024.com/)
+
+My Github [https://github.com/LeonChen1024

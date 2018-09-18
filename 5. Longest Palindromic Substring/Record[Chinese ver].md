@@ -1,9 +1,8 @@
-[Chinese ver]
+
 # 5. Longest Palindromic Substring
 
 给定一个字符串s,找出其中最长的回文格式的子字符串。你可以假设长度的最大值为1000.
 
-Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
 Example:
 ```
 Input: "babad"
@@ -19,8 +18,6 @@ Input: "cbbd"
 
 Output: "bb"
 ```
-
----
 
 一开始以为palindrome是重复的意思，走了很大的弯路，后来才知道指的是回文格式，就是一个顺着读和反过来读都一样的字符串。
 由此可知他有两种情况，一种是奇数的情况，中间的一个字符独立，其余的字符以中间为轴两两对应。另一种是偶数的情况，所有的字符都以中间为轴两两对应。
@@ -214,3 +211,13 @@ public class Solution {
 空间复杂度 ： O(n) .
 
 如果你有更好的办法或者对我这里的描述有其他看法，请联系我。谢谢
+
+## About Me
+
+我的博客 [leonchen1024.com](http://leonchen1024.com/)
+
+我的 GitHub [https://github.com/LeonChen1024](https://github.com/LeonChen1024)
+
+微信公众号 
+
+![wechat](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/Images/CooderQRcodem.jpg?raw=false)

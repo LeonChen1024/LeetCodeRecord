@@ -1,5 +1,5 @@
 
-[English ver]
+
 # 5. Longest Palindromic Substring
 Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
 Example:
@@ -212,8 +212,17 @@ According to the situation we have talk , we can get that when rad[i]-k != rad[i
 As the picture , after compare to the first situation , we can find that because the blackish line is in the black line , so even the orange line is equals , it can't cause a contradiction like situation 1 ,so the orange line can be equals . But , according to the message we know , we have not idear how long is the orange line , so we put the i to the i+k position , j=rad[i-k]\(because it's rad is at least rad[i-k]), wait to next loop to calculate it can expand out or not .
 
 
-时间复杂度 ： O(n) 。it looks like the program is use the nesting loop ,but actualy it only calculate the i which haven't calculated.
-空间复杂度 ： O(n) .
-
+Time complexity  ： O(n) 。it looks like the program is use the nesting loop ,but actualy it only calculate the i which haven't calculated.
+Space complexity ： O(n) .
 
 If you have any suggestions to make the logic and implementation more better , or you have some advice on my description. Please let me know!Thanks!
+
+
+
+## About Me
+
+My blog [leonchen1024.com](http://leonchen1024.com/)
+
+My Github  [https://github.com/LeonChen1024](https://github.com/LeonChen1024)
+
+My twitter [https://twitter.com/LChen1024?lang=en](https://twitter.com/LChen1024?lang=en)
