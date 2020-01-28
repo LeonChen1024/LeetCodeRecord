@@ -1,4 +1,21 @@
+---
+title: LeetCode 9. Palindrome Number
+date: 2020-01-28
+tags:
+- English
+- Algorithm
+- LeetCode
+category:
+- [English,Algorithm,LeetCode]
+toc: true
+thumbnail: /2020/01/28/LeetCode-9-Palindrome-Number/Record-cn/titleThumb.jpg
+banner: /2020/01/28/LeetCode-9-Palindrome-Number/Record-cn/title.jpg
+---
+
+
+
 [English ver]
+
 # 9. Palindrome Number
 
 Determine whether an integer is a palindrome. Do this without extra space.
@@ -93,3 +110,15 @@ Time complexity ：O($log{_10}n$)
 Space complexity ： O(1) .
 
 If you have any suggestions to make the logic and implementation more better , or you have some advice on my description. Please let me know!Thanks!
+
+
+
+# About Me
+
+我的博客 [leonchen1024.com](http://leonchen1024.com/)
+
+我的 GitHub [https://github.com/LeonChen1024](https://github.com/LeonChen1024)
+
+微信公众号 
+
+![wechat](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/Images/CooderQRcodem.jpg?raw=true)

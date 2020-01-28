@@ -1,4 +1,17 @@
-[Chinese ver]
+---
+title: LeetCode 9. Palindrome Number
+date: 2020-01-28
+tags:
+- Chinese
+- Algorithm
+- LeetCode
+category:
+- [Chinese,Algorithm,LeetCode]
+toc: true
+thumbnail: /2020/01/28/LeetCode-9-Palindrome-Number/Record-cn/titleThumb.jpg
+banner: /2020/01/28/LeetCode-9-Palindrome-Number/Record-cn/title.jpg
+---
+
 # 9. Palindrome Number
 
 判断一个整数是不是一个回文。不要使用额外的空间。
@@ -128,3 +141,13 @@ class Solution {
 
 
 如果你有更好的办法或者对我这里的描述有其他看法，请联系我。谢谢
+
+# About Me
+
+我的博客 [leonchen1024.com](http://leonchen1024.com/)
+
+我的 GitHub [https://github.com/LeonChen1024](https://github.com/LeonChen1024)
+
+微信公众号 
+
+![wechat](https://github.com/LeonChen1024/LeetCodeRecord/blob/master/Images/CooderQRcodem.jpg?raw=true)
